@@ -1,0 +1,8 @@
+1. fastq (raw read data, un-cleaned, read length same) -> sam
+
+a) bwa aln -n 4 -o 1 -e 2 (for 101-bp reads, 4%)
+b) bwa samse
+
+2. remove potential PCR duplicates
+a) rmRedunSam2 samFromStep1  tempSAM(reads with same start)
+b) rmRedunSam3 tempSam outSam 4 (reads with same end, 4 same as step 1)
