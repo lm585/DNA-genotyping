@@ -6,3 +6,25 @@ b) bwa samse
 2. remove potential PCR duplicates
 a) rmRedunSam2 samFromStep1  tempSAM(reads with same start)
 b) rmRedunSam3 tempSam outSam 4 (reads with same end, 4 same as step 1)
+
+3. "samtools view" to convert outSam to bam
+
+4. "samtools sort" to sort bam 
+
+Remove intermediate result files.
+After step 1-4, you'll get a sorted bam file for one 1 fastq file
+
+5. If one sample have > 1 fastq files (replicates)
+
+"samtools merge" to merge multiple sorted bam files into one bam file
+
+6. "samtools mpileup  -Q 0 -d 1000000 " to produce mpileup file using the merged bam file 
+
+7. reSeqPrintSample.indel.fast.strAssign    ../../S_lycopersicum_chromosomes.2.40.fa    
+sample-speciesA-1column pileup-file  speciesA  2 2  0.3
+
+1-column genotype for speciesA
+
+8.  reSeqPrintRefChr to generate ref info (3 columns: chr1 123 A)
+
+
